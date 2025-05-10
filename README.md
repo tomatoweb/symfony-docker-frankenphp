@@ -18,9 +18,9 @@ with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) 
 
 ## Add MySQL
 1. docker exec -it symfony-docker-frankenphp-php-1 bash
-2. edit and change db url in compose.yaml windows vscode
+2. Edit and change db url in compose.yaml windows vscode
     DATABASE_URL: mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-!ChangeMe!}@database:3306/${MYSQL_DATABASE:-app}?serverVersion=${MYSQL_VERSION:-8}&charset=${MYSQL_CHARSET:-utf8mb4}
-3. read HOW_TO.txt
+3. Read HOW_TO.txt
 
 ## Features
 
