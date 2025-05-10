@@ -1,7 +1,15 @@
 
-first open docker desktop and stop/drop all containers
+Open Docker Desktop and stop/drop all containers
 
-git clone the project
+git clone git@github.com:tomatoweb/symfony-docker-frankenphp.git
+
+.env
+    APP_ENV=dev
+    APP_SECRET=your_secret_key
+    DATABASE_URL=mysql://db_user:db_password@database:3306/db_name
+    DATABASE_URL=mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-!ChangeMe!}@database:3306/${MYSQL_DATABASE:-app}?serverVersion=${MYSQL_VERSION:-8}&charset=${MYSQL_CHARSET:-utf8mb4}
+    CORS_ALLOW_ORIGIN='^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$'
+
 
 composer require symfony/orm-pack
 
@@ -9,20 +17,22 @@ docker compose build --no-cache
 
 docker compose up --pull always -d --wait
 
-create .env 
-
-		APP_ENV=dev
-		APP_SECRET=your_secret_key
-		DATABASE_URL=mysql://db_user:db_password@database:3306/db_name
-		DATABASE_URL=mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-!ChangeMe!}@database:3306/${MYSQL_DATABASE:-app}?serverVersion=${MYSQL_VERSION:-8}&charset=${MYSQL_CHARSET:-utf8mb4}
-		CORS_ALLOW_ORIGIN=^.*$
-
-test db connection
+Test db connection with Doctrine dbal bundle
 		docker compose exec php bin/console dbal:run-sql -q "SELECT 1" && echo "OK" || echo "Connection is not working"
+        docker compose exec php bin/console dbal:run-sql -q "CREATE TABLE IF NOT EXISTS testTable (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB"
+
+        In DBeaver create a new MariaDB connection
+                server host: localhost
+                port: 3306
+                username: app
+                password: !ChangeMe!
 
 
-open DBeaver and create a new mariadb connection 
-		server host: localhost
-		port: 3306
-		username: app
-		password: !ChangeMe!
+Enter php container
+        docker ps       // check the container name
+        docker exec -it symfony-docker-frankenphp-php-1 bash
+
+
+Install maker bundle and create your app
+        composer require symfony/maker-bundle --dev
+        php bin/console make:controller entity migrations migrate etc...
