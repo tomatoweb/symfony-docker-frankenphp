@@ -27,7 +27,6 @@ Test db connection with Doctrine dbal bundle
                 username: app
                 password: !ChangeMe!
 
-
 Enter php container
         docker ps       // check the container name
         docker exec -it symfony-docker-frankenphp-php-1 bash
