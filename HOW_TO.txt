@@ -35,3 +35,6 @@ Enter php container
 Install maker bundle and create your app
         composer require symfony/maker-bundle --dev
         php bin/console make:controller entity migrations migrate etc...
+
+
+==============
