@@ -1,6 +1,6 @@
 # Symfony Docker MYSQL FrankenPHP Caddy
 
-for a short quick start see HOW_TO.txt
+For a short quick start see HOW_TO.txt
 
 A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework,
 with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) inside!
